@@ -1,7 +1,7 @@
 * {
     margin:0;
     padding: 0;
-    outline: 1px red solid;
+    /*outline: 1px red solid;*/
 }
 
 body{
@@ -19,7 +19,7 @@ header{
 }
 
 .menu{
-    width: 750px;
+    width: 48%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -46,6 +46,13 @@ button{
     background-color: #1d1d1d;
 }
 
-content{
-    width: 1000px;
+.content{
+    display: flex;
+    /*justify-content: center;*/
+    width: 70%;
+    padding-top: 70px;
+}
+
+.contacts{
+    justify-content: left;
 }

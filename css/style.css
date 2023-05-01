@@ -5,6 +5,7 @@
 
 body{
     background-color: #1d1d1d;
+
 }
 
 header{
@@ -67,9 +68,19 @@ button{
     justify-content: space-between;
 }
 
-/*.contacts{
-    margin-right: 550px;
-}*/
+.telegram{
+    position: relative;
+    top: 245px;
+    right: 310px;
+    height: 50px;
+}
+
+.vk{
+    position: relative;
+    top: 55px;
+    right: 600px;
+    height: 50px;
+}
 
 .headd{
     font-family: sans-serif;

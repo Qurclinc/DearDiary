@@ -178,3 +178,39 @@ li{
     width:30%;
     margin-right: 100px;
 }
+
+footer{
+    height: 155px;
+    background-color: #858585;
+    width: 1365px;
+    margin: 0 auto;
+    margin-top: 120px;
+}
+
+.faq{
+    margin-top: 75px;
+    margin-left: 200px;
+    margin-right: 100px;
+}
+
+.FAQS p{
+    margin-top: 25px;
+    font-size: 48px;
+    color: whitesmoke;
+}
+
+.contentDO{
+    display: flex;
+    width: 1365px;
+    padding-top: 200px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.UNAVAILABLE p{
+    font-size: 56px;
+    font-family: sans-serif;
+    color: white;
+}

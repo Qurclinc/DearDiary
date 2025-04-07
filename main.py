@@ -5,12 +5,15 @@ import datetime as dt
 from app.dbworker import get_db, FDataBase, g
 import app.security as sec
 from app.fileworker import FileWorker
+from app.Crypter import Crypter
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = SECRET_KEY
 # app.config["DATABASE"] = DATABASE
 app.config["DEBUG"] = False
 app.permanent_session_lifetime = dt.timedelta(days=30)
+
+crypter = Crypter()
 
 dbase = None
 @app.before_request
@@ -43,7 +46,7 @@ def index():
                 pass
         else:
             abort(405)
-    return render_template("index.html", header=True, logged=logged, is_admin=is_admin, caseList=dbase.caseList())
+    return render_template("index.html", header=True, logged=logged, is_admin=is_admin, caseList=dbase.caseList(), footer=True)
 
 @app.route("/admin", methods=["GET", "POST"])
 def adminPannel():
@@ -60,7 +63,7 @@ def adminPannel():
 
 @app.route("/faq")
 def faq():
-    return render_template("faq.html", header=True, logged=logged)
+    return render_template("faq.html", header=True, logged=logged, footer=True)
 
 @app.route("/responses")
 def responses():
@@ -84,7 +87,7 @@ def login():
             flash("Пользователь не существует!", category="error")
     if logged:
         return redirect(url_for("index"))
-    return render_template("login.html", header=True)
+    return render_template("login.html", header=True, no_footer=True)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -128,7 +131,7 @@ def add_case():
     if request.method == "POST":
         res = dbase.addCase(request.form["title"], request.form["text"])
         flash(res[1], category="success" if res[0] else "error")
-    return render_template("add_case.html", header=False, logged=logged, case_css=True)
+    return render_template("add_case.html", header=False, logged=logged, case_css=True, footer=True)
 
 @app.route("/<case_id>")
 def showCase(case_id):
@@ -140,7 +143,41 @@ def showCase(case_id):
         # text = fw.readFile(url)
     except ValueError:
         abort(404)
-    return render_template("case.html", header=False, logged=logged, title=title, text=text, case_css=True)
+    return render_template("case.html", header=False, logged=logged, title=title, is_admin=is_admin, text=text, case_css=True, footer=True)
+
+@app.route("/decrypt")
+def decrypt_text():
+    return render_template("crypt.html", logged=logged, page_type="decrypt")
+
+@app.route("/encrypt")
+def encrypt_text():
+    if not(is_admin):
+        abort(403)
+    return render_template("crypt.html", logged=logged, page_type="encrypt")
+
+@app.route("/api/v1/deardiary/decrypt", methods=["POST"])
+def decrypt():
+    data = request.get_json()
+    text = data["text"]
+    key = data["key"]
+    try:
+        decrypted_data = crypter.decrypt(text, key)
+        return {"status": "success", "data": decrypted_data}
+    except Exception:
+        return {"status": "fail", "data": ""}, 400
+    
+@app.route("/api/v1/deardiary/encrypt", methods=["POST"])
+def encrypt():
+    if not(is_admin):
+        abort(403)
+    data = request.get_json()
+    text = data["text"]
+    key = data["key"]
+    try:
+        encrypted_data = crypter.encrypt(text, key)
+        return {"status": "success", "data": encrypted_data}
+    except Exception:
+        return {"status": "fail", "data": ""}, 400
 
 @app.route("/teapot")
 def teapot():
@@ -151,11 +188,11 @@ def exit_db(error):
     if hasattr(g, "link_db"):
         g.link_db.close()
 
-# @app.errorhandler(400)
-# def Forbidden(error):
-#     title = "400. Некорректный запрос."
-#     error_text = "Вероятно, в синтаксисе запроса содержится ошибка. Перепроверьте его еще раз."
-#     return render_template("error.html", title=title, error_text=error_text), 400
+@app.errorhandler(400)
+def Forbidden(error):
+    title = "400. Некорректный запрос."
+    error_text = "Вероятно, в синтаксисе запроса содержится ошибка. Перепроверьте его еще раз."
+    return render_template("error.html", title=title, error_text=error_text), 400
 
 @app.errorhandler(403)
 def Forbidden(error):
@@ -209,7 +246,7 @@ def ServiceUnavailable(error):
 def Forbidden(error):
     title = "504. Превышено время ожидания."
     error_text = "Превышено время ожидания ответа от вышестоящего сервера."
-    return render_template("error.html", title=title, error_text=error_text), 502
+    return render_template("error.html", title=title, error_text=error_text), 504
 
 if __name__ == "__main__":
-    app.run("127.0.0.1", 5000, debug=False)
+    app.run("127.0.0.1", 5000, debug=True)

@@ -122,7 +122,7 @@ button{
     display: flex;
     align-self: top;
     margin-top: 220px;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .aboutcom p{
@@ -160,7 +160,7 @@ li{
     text-decoration: none;
 }
 
-.marked-list a::hower{
+.marked-list a:hover{
     color: white;
     text-decoration: none;
 }
@@ -218,7 +218,7 @@ li{
     position: relative;
     top: 20px;
     /* left: 84px; */
-    left: 67px;
+    left: 96px;
 }
 
 .remove_inp input{
@@ -513,4 +513,124 @@ footer{
 .admin_pannel th,.admin_pannel td {
     border: 1px #fff solid;
     text-align: center;
+}
+
+
+
+footer {
+    width: 1365px;
+    margin: 0 auto;
+    height: 125px;
+    background-color: #858585;
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.tools {
+    width: 30%;
+    height: 70%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.tools a{ 
+    color: white;
+    font-family: sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    display: block;
+}
+
+.tools a:active{
+    color: white;
+    text-decoration: none;
+}
+
+.tools a:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.tools a::after{
+    color: white;
+    text-decoration: none;
+}
+
+.crypter {
+    display: flex;
+    width: 1365px;
+    padding-top: 70px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.crypter label {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    margin-top: 15%;
+    font-size: 32px;
+}
+
+.crypter form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    align-items: center;
+}
+
+.crypter textarea {
+    margin-top: 25px;
+    color: #fff;
+    font-family: sans-serif;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+    overflow: hidden;
+    font-size: 20px;
+    background-color: #1d1d1d;
+    border: 3px #4b4b4b solid;
+    height: 125px;
+}
+
+.crypter input {
+    width: 99%;
+    color: #fff;
+    height: 15px;
+    padding: 5px;
+    background-color: #1d1d1d;
+    border: 3px #4b4b4b solid;
+    font-size: 20px;
+}
+
+.crypter input:focus {
+    outline: none;
+}
+.crypter textarea:focus,.crypter textarea:focus {
+    outline: none;
+    border-color: #4b4b4b;
+}
+
+.crypt_btn {
+    margin-top: 3%;
+    height: 50px;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 9px;
+    background-color: #4b4b4b;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+.crypt_btn:hover {
+    background-color: #5c5c5c;   
 }

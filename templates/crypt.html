@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="crypter">
+        <form>
+            {% if page_type == "decrypt" %}
+                <div><label>Зашифрованный текст</label></div>
+            {% else %}
+                <div><label>Исходный текст</label></div>
+            {% endif %}
+            <textarea id="auto-resize" name="input_text" required="" placeholder=""></textarea>
+            <div><label>Ключ</label></div>
+            <input name="key" required="" placeholder="Ключ шифрования" value=""></input>
+            {% if page_type == "decrypt" %}
+                <div><label>Расшифрованный текст</label></div>
+            {% else %}
+                <div><label>Зашифрованный текст</label></div>
+            {% endif %}
+            <textarea id="auto-resize" name="output_text" placeholder="" readonly></textarea>
+            {% if page_type == "decrypt" %}
+                <button class="crypt_btn" id="decrypt-btn" type="button">Расшифровать</button>
+            {% else %}
+                <button class="crypt_btn" id="encrypt-btn" type="button">Зашифровать</button>
+            {% endif %}
+        </form>
+    </div>
+    <script src="{{url_for('static', filename='js/resize.js')}}"></script>
+    <script src="{{url_for('static', filename='js/crypt.js')}}"></script>
+{% endblock content %}

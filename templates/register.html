@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{{super().__init__()}}
+
+{% block header %}
+<header>
+    <div class="menu">
+        <div class="main-section">
+            <a href="{{url_for('index')}}"><button class="unactive_btn"><p>МЕНЮ</p></button></a>
+        </div>
+        <div class="faq-section">
+            <a href="{{url_for('faq')}}"><button class="unactive_btn"><p>FAQ</p></button></a>
+        </div>
+        <div class="feedback-section">
+            <a href="{{url_for('responses')}}"><button class="unactive_btn"><p>ОТЗЫВЫ</p></button></a>
+        </div>
+        <div class="login-section">
+            <a href="{{url_for('login')}}"><button class="active_btn"><p>ВОЙТИ</p></button></a>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+{% block content %}
+    <div class="content">
+        <div class="authorization">Регистрация</div>
+        <div class="auth_form">
+            <form method="POST">
+                <div class="label"><p><label>Имя пользователя: </label></p><div><input type="text", required="", name="username"/></div></div>
+                <div class="label"><p><label>Пароль: </label></p><div><input type="password" required="" name="passwd" /></div></div>
+                <div class="label"><p><label>Повтор пароля: </label></p><div><input type="password" required="" name="passwd2" /></div></div>
+                {% for cat, msg in get_flashed_messages(True) %}
+                    <div class="flash {{cat}}">{{msg}}</div>
+                {% endfor %}
+                <div class="reg_bot_part"><div class="log_btn"><input type="submit" value="Зарегистрироваться" name="register"/></div>
+                <div class="log_btn"><a href="{{url_for('login')}}">Уже есть аккаунт? Войти</div></div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

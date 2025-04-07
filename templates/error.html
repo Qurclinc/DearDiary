@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link href="{{url_for('static', filename='css/error.css')}}" rel="stylesheet"/>
+        <link rel="icon" href="{{url_for('static', filename='img/yellow_moon.ico')}}" type="image/x-icon"/>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <div class="main">
+            <content>
+                <div class="h1">{{title}}</div>
+                <div><p>{{error_text}} <br/>
+                    <i><a href="{{url_for('index')}}">Вернуться на главную.</a></i></p></div>
+            </content>
+            <div class="footer">
+                <img src="{{url_for('static', filename='img/moon-bottom.png')}}" alt="moon"/>
+                <img src="{{url_for('static', filename='img/stars3.png')}}" alt="stars3"/>
+            </div>
+        </div>
+    </body>
+</html>

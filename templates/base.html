@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=0.2, maximum-scale=1.0"/>
+        <title>Dear Diary</title>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
+        {% if case_css %}
+            <link href="{{url_for('static', filename='css/case.css')}}" rel="stylesheet"/>
+        {% else %}
+            <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet"/>
+        {% endif %}
+        <link rel="icon" href="{{url_for('static', filename='img/yellow_moon.ico')}}" type="image/x-icon"/>
+        <!-- <script src="js/no-scroll.js"></script> -->
+    </head>
+    <body>
+        <!-- HEADER-->
+        {% if header %}
+            {% block header %}        
+            {% endblock header %}
+        {% else %}
+        <header>
+            <div class="menu">
+                <div class="main-section">
+                    <a href="{{url_for('index')}}"><button class="unactive_btn"><p>МЕНЮ</p></button></a>
+                </div>
+                <div class="faq-section">
+                    <a href="{{url_for('faq')}}"><button class="unactive_btn"><p>FAQ</p></button></a>
+                </div>
+                <div class="feedback-section">
+                    <a href="{{url_for('responses')}}"><button class="unactive_btn"><p>ОТЗЫВЫ</p></button></a>
+                </div>
+                {% if logged %}
+                <div class="login-section">
+                    <a href="{{url_for('logout')}}"><button class="unactive_btn"><p>ВЫЙТИ</p></button></a>
+                </div>
+                {% else %}
+                    <div class="login-section">
+                        <a href="{{url_for('login')}}"><button class="unactive_btn"><p>ВОЙТИ</p></button></a>
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+        {% endif %}
+        <!-- CONTENT -->
+        {% block content %}
+        
+        {% endblock content %}
+        <!-- FOOTER-->
+        <!-- <footer>
+
+        </footer> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </body>
+</html>

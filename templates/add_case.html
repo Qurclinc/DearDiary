@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{{super().__init__()}}
+
+{% block content %}
+<div class="content">
+    <div class="top_inf">
+        <div class="left-part">
+            <p>
+                {% for cat, msg in get_flashed_messages(True) %}
+                    <div class="flash {{cat}}">{{msg}}</div>
+                {% endfor %}
+                <form method="POST">
+                    <p><input required="" name="title" placeholder="Название"/></p>
+                    <textarea id="auto-resize" name="text" required="" placeholder="Описание">
+                    </textarea>
+                    <div class="add"><input value="Добавить" type="submit" name="add"/>
+                        <input value="Очистить" type="reset" name="clear"/></div>
+                </form>
+            </p>
+        </div>
+        <div class="right-part">
+            <div class="starblock1"><img src="{{url_for('static', filename='img/stars1.png')}}" alt="stars1"/></div>
+            <div class="starblock2"><img src="{{url_for('static', filename='img/stars2.png')}}" alt="stars2"/></div>
+            <div class="starblock3"><img src="{{url_for('static', filename='img/stars3.png')}}" alt="stars3"/></div>
+
+        </div>
+    </div>
+    <div class="bot_inf">
+        <div class="moon-bottom"><img src="{{url_for('static', filename='img/moon-bottom.png')}}" alt="moon-bottom"/></div>
+        <script src="{{url_for('static', filename='js/resize.js')}}"></script>
+    </div>
+</div>
+{% endblock content %}

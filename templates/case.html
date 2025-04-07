@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{{super()._init__()}}
+
+{% block content %}
+<div class="content">
+    <div class="top_inf">
+        <div class="left-part">
+            <h1>{{title}}</h1>
+            <p>
+                {{text | safe}}
+            </p>
+        </div>
+        <div class="right-part">
+            <div class="starblock1"><img src="{{url_for('static', filename='img/stars1.png')}}" alt="stars1"/></div>
+            <div class="starblock2"><img src="{{url_for('static', filename='img/stars2.png')}}" alt="stars2"/></div>
+            <div class="starblock3"><img src="{{url_for('static', filename='img/stars3.png')}}" alt="stars3"/></div>
+
+        </div>
+    </div>
+    <div class="bot_inf">
+        <div class="moon-bottom"><img src="{{url_for('static', filename='img/moon-bottom.png')}}" alt="moon-bottom"/></div>
+        <script src="{{url_for('static', filename='js/resize.js')}}"></script>
+    </div>
+</div>
+{% endblock content %}

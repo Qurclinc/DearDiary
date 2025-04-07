@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{{super().__init__()}}
+
+{% block content %}
+<div class="content">
+    <div class="admin_pannel">
+        <div class="authorization">Админ панель</div>
+        <form method="POST">
+            <div class="adm"><div class="top_adm"><div><label class="checkbox">
+            {% if status == True %}
+                <input name="reg_av" type="checkbox" checked="True"/>
+            {% else %}
+                <input name="reg_av" type="checkbox"/>
+            {% endif %}
+            <span class="checkmark"></span>
+            </label></div>
+            <div><p>Возможность регистрации</p></div></div>
+            <div class="bot_adm"><div class="log_btn"><input type="submit" value="Применить"/></div></div></div>
+        </form>
+        <table>
+            <tr>
+                <th width="5%">id</th>
+                <th width="30%">Username</th>
+                <th width="55%">Password</th>
+                <th width="10%">Admin</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{user[0]}}</td>
+                    <td>{{user[1]}}</td>
+                    <td>{{user[2]}}</td>
+                    <td>{{user[3]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

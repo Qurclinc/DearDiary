@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{{super().__init__()}}
+
+{% block header %}
+<header>
+    <div class="menu">
+        <div class="main-section">
+            <a href="{{url_for('index')}}"><button class="active_btn"><p>МЕНЮ</p></button></a>
+        </div>
+        <div class="faq-section">
+            <a href="{{url_for('faq')}}"><button class="unactive_btn"><p>FAQ</p></button></a>
+        </div>
+        <div class="feedback-section">
+            <a href="{{url_for('responses')}}"><button class="unactive_btn"><p>ОТЗЫВЫ</p></button></a>
+        </div>
+        {% if logged %}
+            <div class="login-section">
+                <a href="{{url_for('logout')}}"><button class="unactive_btn"><p>ВЫЙТИ</p></button></a>
+            </div>
+        {% else %}
+            <div class="login-section">
+                <a href="{{url_for('login')}}"><button class="unactive_btn"><p>ВОЙТИ</p></button></a>
+            </div>
+        {% endif %}
+    </div>
+</header>
+{% endblock header %}
+
+{% block content %}
+    <div class="content">
+            <div class="top_inf">
+                <div class="topclass">
+                    <div class="contacts">
+                        <img src="{{url_for('static', filename='img/round.png')}}" alt="conacts"/>
+                    </div>
+                    <div class="telegram"><a href="https://t.me/user0635"><img src="{{url_for('static', filename='img/tg.png')}}" alt="tg"/></a></div>
+                    <div class="vk"><a href="https://vk.com/club209875251"><img src="{{url_for('static', filename='img/vk.png')}}" alt="vk"/></a></div>
+                    <div class="intro">
+                        <span class="headd">Dear Diary,</span>
+                        <p>This night <br/>
+                            I saw a dream..</br>
+                        </p>
+                    </div>
+                </div>
+                <div class="moon">
+                    <div class="aboutcom">
+                        <p>
+                            Where the moon was yellow<br/>
+                            and the night was young<br/>
+                            It was raining tonight.</p>
+                    </div>
+                    <img src="{{url_for('static', filename='img/moon2.png')}}" alt="moon"/>
+                </div>
+            </div>
+            <div class="bot_inf">
+                <div class="left-part">
+                    <div class="chapters"><p>СЛУЧАИ</p></div>
+                    <div class="marked-list">
+                        <ul>
+                            {% for case in caseList %}
+                                {% set id = case[0] | string %}
+                                <li><a href="{{url_for('showCase', case_id='case' + id)}}">{{case[1]}}</a></li>
+                            {% endfor %}
+                            {% if is_admin %}
+                            <div class="case_pannel">
+                                <div class="add_case"><a href="{{url_for('add_case')}}">Добавить случай.</a></div>
+                                <form method="POST">
+                                    <input class="remove_btn" value="Удалить случай" name="remove" type="submit"/>
+                                    <input class="remove_inp" type="text" name="id"/></p>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </ul>
+                        <div class="moon-bottom"><img src="{{url_for('static', filename='img/moon-bottom.png')}}" alt="moon-bottom"/></div>
+                    </div>
+                </div>
+                <div class="right-part">
+                    <div class="starblock1"><img src="{{url_for('static', filename='img/stars1.png')}}" alt="stars1"/></div>
+                    <div class="starblock2"><img src="{{url_for('static', filename='img/stars2.png')}}" alt="stars2"/></div>
+                    <div class="starblock3"><img src="{{url_for('static', filename='img/stars3.png')}}" alt="stars3"/></div>
+                    <div class="starblock1"><img src="{{url_for('static', filename='img/stars1.png')}}" alt="stars1"/></div>
+                    <div class="starblock2"><img src="{{url_for('static', filename='img/stars2.png')}}" alt="stars2"/></div>
+                    <div class="starblock3"><img src="{{url_for('static', filename='img/stars3.png')}}" alt="stars3"/></div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
